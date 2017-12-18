@@ -133,7 +133,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Tategumi.Forms\Tategumi.Forms.csproj">
-      <Project>{41DD3FFA-5B79-419A-97A4-00504DE174DF}</Project>
+      <Project>{29C130A6-E9A2-4A24-B097-DB2076DD91CC}</Project>
       <Name>Tategumi.Forms</Name>
     </ProjectReference>
   </ItemGroup>
