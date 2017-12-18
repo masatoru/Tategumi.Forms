@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
+using Tategumi.Core;
 using Xamarin.Forms;
 
 namespace Tategumi.Forms
@@ -37,25 +38,11 @@ namespace Tategumi.Forms
 //			}
         }
 
-        void DrawSample(SKCanvas canvas, int width, int height)
-        {
-            canvas.DrawColor(SKColors.White);
-
-            using (var paint = new SKPaint())
-            {
-                paint.TextSize = 64.0f;
-                paint.IsAntialias = true;
-                paint.Color = (SKColor) 0xFF4281A4;
-                paint.IsStroke = false;
-
-                canvas.DrawText("SkiaSharp", width / 2f, height/2f, paint);
-            }
-        }
 
 
         private void OnPaintSample(object sender, SKPaintSurfaceEventArgs e)
         {
-            DrawSample(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+            TextSample.DrawSample(e.Surface.Canvas, e.Info.Width, e.Info.Height);
 
             //lastImage?.Dispose();
             //lastImage = e.Surface.Snapshot();

@@ -2,6 +2,8 @@
 
 using AppKit;
 using Foundation;
+using SkiaSharp.Views.Mac;
+using Tategumi.Core;
 
 namespace Tategumi.Mac
 {
@@ -30,5 +32,27 @@ namespace Tategumi.Mac
                 // Update the view, if already loaded.
             }
         }
+
+        public override void ViewWillAppear()
+        {
+            base.ViewWillAppear();
+
+            canvas.PaintSurface += OnPaintCanvas;
+        }
+
+        public override void ViewWillDisappear()
+        {
+            base.ViewWillDisappear();
+
+            canvas.PaintSurface -= OnPaintCanvas;
+        }
+
+        private void OnPaintCanvas(object sender, SKPaintSurfaceEventArgs e)
+        {
+            //OnPaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+            TextSample.DrawSample(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+
+        }
+
     }
 }

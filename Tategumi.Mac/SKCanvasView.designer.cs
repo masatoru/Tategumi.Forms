@@ -9,18 +9,12 @@ using System.CodeDom.Compiler;
 
 namespace Tategumi.Mac
 {
-	[Register ("ViewController")]
-	partial class ViewController
+	[Register ("SKCanvasView")]
+	partial class SKCanvasView
 	{
-		[Outlet]
-		SkiaSharp.Views.Mac.SKCanvasView canvas { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (canvas != null) {
-				canvas.Dispose ();
-				canvas = null;
-			}
 		}
 	}
 }
