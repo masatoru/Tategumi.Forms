@@ -93,6 +93,7 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ResourceDirectoryImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -111,6 +112,8 @@
     <BundleResource Include="Resources\Icon-Small%402x.png" />
     <BundleResource Include="Resources\Icon-Small%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\kokoro.htm" />
+    <BundleResource Include="Resources\ipaexm.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -136,5 +139,8 @@
       <Project>{29C130A6-E9A2-4A24-B097-DB2076DD91CC}</Project>
       <Name>Tategumi.Forms</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>
