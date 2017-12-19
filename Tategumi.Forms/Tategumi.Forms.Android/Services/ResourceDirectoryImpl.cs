@@ -20,7 +20,19 @@ namespace Tategumi.Droid.Services
         }
         public FileStream OpenFontFile(string fileName)
         {
-            return Android.App.Application.Context.Assets.Open(fileName) as FileStream;
+            var stream = Android.App.Application.Context.Assets.Open(fileName);
+
+            var copyPath = System.IO.Path.Combine(
+                System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), fileName);
+
+//            var fontPath = Path.Combine(CacheDir.AbsolutePath, fileName);
+            using (var asset = Android.App.Application.Context.Assets.Open(fileName))
+            using (var dest = File.Open(copyPath, FileMode.Create))
+            {
+                asset.CopyTo(dest);
+            }
+            return File.OpenRead(copyPath);
+
         }
     }
 }
