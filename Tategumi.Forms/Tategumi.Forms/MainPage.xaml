@@ -1,18 +1,33 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Tategumi.Forms"
-             xmlns:views="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
-             x:Class="Tategumi.Forms.MainPage">
-
-    <Grid>
-        <views:SKCanvasView x:Name="canvas" PaintSurface="OnPaintSample">
-            <views:SKCanvasView.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnTapSample" />
-                <PanGestureRecognizer PanUpdated="OnPanSample" />
-                <PinchGestureRecognizer PinchUpdated="OnPinchSample" />
-            </views:SKCanvasView.GestureRecognizers>
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Tategumi.Forms"
+    xmlns:views="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+    x:Class="Tategumi.Forms.MainPage"
+    Padding="30, 60, 30, 30">
+    <!--    <ContentPage.Padding>
+        <OnPlatform
+            x:TypeArguments="Thickness"
+            iOS="0, 20, 0, 0"
+            Android="0"
+            WinPhone="0" />
+    </ContentPage.Padding>
+-->
+    <StackLayout>
+        <views:SKCanvasView
+            x:Name="canvas"
+            PaintSurface="OnPaintSample"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
         </views:SKCanvasView>
-    </Grid>
+        <StackLayout
+            HorizontalOptions="Center"
+            Orientation="Horizontal">
+            <Button
+                Text="前頁" />
+            <Button
+                Text="次頁" />
+        </StackLayout>
+    </StackLayout>
 </ContentPage>
-

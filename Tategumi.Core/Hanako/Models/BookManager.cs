@@ -10,36 +10,35 @@ namespace Tategumi.Models
     {
         private int CurrentArticleId { get; set; }
         List<HKPara> _paralst;  //段落
-        IList<IHKWaxPage> _pglst;     //組版されたページ一覧
+        public IList<IHKWaxPage> PageList { get; set; }     //組版されたページ一覧
         List<HKWaxLine> _lnlst;
         public BookManager()
         {
             _paralst = new List<HKPara>();
             _lnlst = new List<HKWaxLine>();
-            _pglst = new List<IHKWaxPage>();
+            PageList = new List<IHKWaxPage>();
             CurrentArticleId = -1;
         }
         public int PageNum { get; set; }
         public int PageIndex { get; set; }
-        public int TateviewWidth { get; set; }
-        public int TateviewHeight { get; set; }
+        public double TateviewWidth { get; set; }
+        public double TateviewHeight { get; set; }
         public string Title { get; set; }
         public bool IsFontSizeLarge { get; set; }
-        public bool IsVisibleHinshi { get; set; }
 
         /// <summary>
         /// 本文をURLから読み込み(未使用)
         /// </summary>
         /// <returns>The honbun html from URL.</returns>
         /// <param name="path"></param>
-        public void ReadFromPath(string path)
+        public void ReadFromText(string hbn)
         {
             //var ser = new BookService2(new BookRepository());
             //string hbn = await ser.GetBookFromUrl(new System.Uri(url));
-            //_paralst?.Clear();
-            //var parser = new HKSimpleParser();
-            //parser.ParseFromText(hbn);
-            //_paralst = parser.ResultParaList;
+            _paralst?.Clear();
+            var parser = new HKSimpleParser();
+            parser.ParseFromText(hbn);
+            _paralst = parser.ResultParaList;
         }
 
         /// <summary>
@@ -48,18 +47,17 @@ namespace Tategumi.Models
         public void Compose()
         {
             //if (_paralst?.Count == 0 ) return;
-            if (isValid() != true) return;
+            if (IsValid() != true) return;
 
-            int devw = TateviewWidth;
-            int devh = TateviewHeight;
+            double devw = TateviewWidth;
+            double devh = TateviewHeight;
             //1.Compose
-            float fntSz = 24;
+            //float fntSz = 24;
+            float fntSz = 60;
             if (IsFontSizeLarge == true)
                 fntSz += 24;
             //float gyokanSz = fntSz * 0.5f;
             float gyokanSz = fntSz * 1.0f;
-            if (IsVisibleHinshi == true)
-                gyokanSz += fntSz * 1.0f;
             float mg = 10;    //デバイスに対しての余白
             HKComposer comp = new HKComposer();
             comp.FontSize = fntSz;
@@ -69,18 +67,19 @@ namespace Tategumi.Models
             comp.Compose(_paralst, ref _lnlst);
 
             //2.Page一覧
-            _pglst.Clear();
-            HKPageCreate.CreatePageList((float)devw - mg * 2, fntSz, _lnlst, ref _pglst);
+            PageList.Clear();
+            var pglst = PageList;
+            HKPageCreate.CreatePageList((float)devw - mg * 2, fntSz, _lnlst, ref pglst);
 
             //3.Deviceの値に変換
             HKDevice dev = new HKDevice();
             dev.setup(fntSz, (float)devw, (float)devh, mg, mg, mg, mg);
-            dev.calcToDevice(ref _pglst);
+            dev.calcToDevice(ref pglst);
 
-            PageNum = _pglst.Count;
+            PageNum = PageList.Count;
         }
 
-        bool isValid()
+        public bool IsValid()
         {
             if (_paralst?.Count == 0) return false;
             if (TateviewWidth <= 0 || TateviewHeight <= 0) return false;
