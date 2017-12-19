@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace:Tategumi.Forms"
     xmlns:views="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
     x:Class="Tategumi.Forms.MainPage"
-    Padding="30, 60, 30, 30">
+    Padding="5, 20, 5, 5">
     <!--    <ContentPage.Padding>
         <OnPlatform
             x:TypeArguments="Thickness"
