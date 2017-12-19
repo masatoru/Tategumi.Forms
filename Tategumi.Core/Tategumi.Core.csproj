@@ -6,6 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="SkiaSharp" Version="1.59.2" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.6.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Hanako\" />
+  </ItemGroup>
 </Project>
