@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Tategumi.Core;
+using Tategumi.Services;
 using Xamarin.Forms;
 
 namespace Tategumi.Forms
@@ -18,8 +19,17 @@ namespace Tategumi.Forms
         public MainPage()
         {
             InitializeComponent();
-
             Init();
+        }
+
+        /// <summary>
+        /// Read text from path
+        /// </summary>
+        /// <returns>The book from file name.</returns>
+        /// <param name="fileName">File name.</param>
+        public string GetBookFromFileName(string fileName)
+        {
+            return DependencyService.Get<IResourceDirectory>().ReadText(fileName);
         }
 
         public void Init()
@@ -27,39 +37,22 @@ namespace Tategumi.Forms
             // reset the matrix for the new sample
             Matrix = SKMatrix.MakeIdentity();
             IsInitialized = true;
-
-//            if (!IsInitialized)
-//			{
-//				await OnInit();
-//
-//				IsInitialized = true;
-//
-//				Refresh();
-//			}
         }
 
-
-
-        private void OnPaintSample(object sender, SKPaintSurfaceEventArgs e)
+        void OnPaintSample(object sender, SKPaintSurfaceEventArgs e)
         {
             TextSample.DrawSample(e.Surface.Canvas, e.Info.Width, e.Info.Height);
-
-            //lastImage?.Dispose();
-            //lastImage = e.Surface.Snapshot();
-
-//			var view = sender as SKCanvasView;
-//			DrawScaling(view, e.Surface.Canvas, view.CanvasSize);
         }
-	    private void OnTapSample(object sender, EventArgs e)
-	    {
-	    }
+        void OnTapSample(object sender, EventArgs e)
+        {
+        }
 
-	    private void OnPanSample(object sender, PanUpdatedEventArgs e)
-	    {
-	    }
+        void OnPanSample(object sender, PanUpdatedEventArgs e)
+        {
+        }
 
-	    private void OnPinchSample(object sender, PinchGestureUpdatedEventArgs e)
-	    {
-	    }
+        void OnPinchSample(object sender, PinchGestureUpdatedEventArgs e)
+        {
+        }
     }
 }
