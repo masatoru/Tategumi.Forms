@@ -6,10 +6,17 @@
         xmlns:local="clr-namespace:Tategumi.WPF"
         xmlns:views="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Grid>
-            <views:SKElement x:Name="canvas" PaintSurface="OnPaintCanvas" />
-        </Grid>
+        Title="MainWindow" Height="650" Width="525"
+>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <views:SKElement x:Name="canvas" PaintSurface="OnPaintCanvas" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="次頁" Width="50" Margin="5,0" />
+            <Button Content="前頁" Width="50" Margin="5,0" />
+        </StackPanel>
     </Grid>
 </Window>

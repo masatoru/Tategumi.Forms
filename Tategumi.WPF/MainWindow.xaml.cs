@@ -27,18 +27,41 @@ namespace Tategumi.WPF
     public partial class MainWindow : Window
     {
         protected SKMatrix Matrix = SKMatrix.MakeIdentity();
-        public bool IsInitialized { get; private set; }
+        public bool isInitialized { get; private set; }
         BookManager Manager { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             Manager = new BookManager();
+
+            // 最初の起動時に初期化
+            Activated += (s, e) =>
+            {
+                Init();
+                OnRefreshRequested(null, null);
+
+            };
+
+            // サイズが変わったら組版する
+            SizeChanged += (s, e) =>
+            {
+                Manager.TateviewWidth = canvas.CanvasSize.Width;
+                Manager.TateviewHeight = canvas.CanvasSize.Height;
+                Manager.Compose(true);
+                // refresh the view
+                OnRefreshRequested(null, null);
+            };
+        }
+
+        private void OnRefreshRequested(object sender, EventArgs e)
+        {
+            canvas.InvalidateVisual();
         }
 
         public void Init()
         {
-            if (IsInitialized) return;
+            if (isInitialized) return;
             // reset the matrix for the new sample
             Matrix = SKMatrix.MakeIdentity();
 
@@ -52,19 +75,18 @@ namespace Tategumi.WPF
             }
             Manager.TateviewWidth = canvas.CanvasSize.Width;
             Manager.TateviewHeight = canvas.CanvasSize.Height;
+            Manager.FontSise = 24;
 
-            //TategumiViewCore.OpenFontStream = () => File.Open(@"ipaexm.ttf", FileMode.Open);
-            TategumiViewCore.OpenFontStream = 
+            TategumiViewCore.OpenFontStream =
                 () => assembly.GetManifestResourceStream(@"Tategumi.WPF.ipaexm.ttf");
 
             // 組版する
             Manager.Compose();
-            IsInitialized = true;
+            isInitialized = true;
         }
 
         private void OnPaintCanvas(object sender, SKPaintSurfaceEventArgs e)
         {
-            Init();
             if (Manager.IsValid())
                 TategumiViewCore.DrawHonbunPage(e.Surface.Canvas, Manager.PageList?[0], false);
         }
