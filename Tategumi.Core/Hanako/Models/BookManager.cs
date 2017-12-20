@@ -25,6 +25,7 @@ namespace Tategumi.Models
         public double TateviewHeight { get; set; }
         public string Title { get; set; }
         public bool IsFontSizeLarge { get; set; }
+        public float FontSise { get; set; } = 36;
 
         /// <summary>
         /// 本文をURLから読み込み(未使用)
@@ -44,16 +45,15 @@ namespace Tategumi.Models
         /// <summary>
         /// ページを組版
         /// </summary>
-        public void Compose()
+        public void Compose(bool isForce=false)
         {
-            //if (_paralst?.Count == 0 ) return;
-            if (IsValid() != true) return;
+            if ( isForce!=true && IsValid() != true) return;
 
+            PageIndex = 0;
             double devw = TateviewWidth;
             double devh = TateviewHeight;
             //1.Compose
-            //float fntSz = 24;
-            float fntSz = 60;
+            float fntSz = FontSise;
             if (IsFontSizeLarge == true)
                 fntSz += 24;
             //float gyokanSz = fntSz * 0.5f;
