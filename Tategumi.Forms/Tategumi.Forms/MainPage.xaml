@@ -6,14 +6,6 @@
     xmlns:views="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
     x:Class="Tategumi.Forms.MainPage"
     Padding="5, 20, 5, 5">
-    <!--    <ContentPage.Padding>
-        <OnPlatform
-            x:TypeArguments="Thickness"
-            iOS="0, 20, 0, 0"
-            Android="0"
-            WinPhone="0" />
-    </ContentPage.Padding>
--->
     <StackLayout>
         <views:SKCanvasView
             x:Name="canvas"
