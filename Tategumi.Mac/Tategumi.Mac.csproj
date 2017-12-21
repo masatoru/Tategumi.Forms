@@ -110,9 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="ipaexm.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="kokoro.htm" />
+    <BundleResource Include="kokoro.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
 </Project>
