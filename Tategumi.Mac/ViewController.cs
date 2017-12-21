@@ -52,6 +52,7 @@ namespace Tategumi.Mac
             Manager.ReadFromText(text);
             Manager.TateviewWidth = canvas.CanvasSize.Width;
             Manager.TateviewHeight = canvas.CanvasSize.Height;
+            Manager.FontSize = 24;
             path = NSBundle.MainBundle.PathForResource("ipaexm", "ttf");
             TategumiViewCore.OpenFontStream = () => File.Open(path,FileMode.Open);
 
