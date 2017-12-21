@@ -42,6 +42,7 @@ namespace Tategumi.Forms
             Manager.ReadFromText(text);
             Manager.TateviewWidth = canvas.CanvasSize.Width;
             Manager.TateviewHeight = canvas.CanvasSize.Height;
+            Manager.FontSize = 48;
             TategumiViewCore.OpenFontStream = 
                 () => DependencyService.Get<IResourceDirectory>().OpenFontFile("ipaexm.ttf");
 
