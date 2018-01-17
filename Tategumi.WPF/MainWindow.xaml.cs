@@ -75,7 +75,7 @@ namespace Tategumi.WPF
             }
             Manager.TateviewWidth = canvas.CanvasSize.Width;
             Manager.TateviewHeight = canvas.CanvasSize.Height;
-            Manager.FontSise = 24;
+            Manager.FontSize = 24;
 
             TategumiViewCore.OpenFontStream =
                 () => assembly.GetManifestResourceStream(@"Tategumi.WPF.ipaexm.ttf");
